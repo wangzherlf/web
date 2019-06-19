@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta name="generator" content="Hexo 3.9.0">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="专注前端开发, 关注用户体验">
+    <meta name="keyword" content="javascript">
+    <link rel="shortcut icon" href="/web/img/favicon.ico">
+
+    <title>
+        
+        nginx.md - Rafael.ru的博客 | Rafael.ru&#39;s Blog
+        
+    </title>
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/web/css/aircloud.css">
+    <link rel="stylesheet" href="/web/css/gitment.css">
+    <!--<link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">-->
+    <link href="//at.alicdn.com/t/font_620856_pl6z7sid89qkt9.css" rel="stylesheet" type="text/css">
+    <!-- ga & ba script hoook -->
+    <script></script>
+</head>
+
+<body>
+
+<div class="site-nav-toggle" id="site-nav-toggle">
+    <button>
+        <span class="btn-bar"></span>
+        <span class="btn-bar"></span>
+        <span class="btn-bar"></span>
+    </button>
+</div>
+
+<div class="index-about">
+    <i>  </i>
+</div>
+
+<div class="index-container">
+    
+    <div class="index-left">
+        
+<div class="nav" id="nav">
+    <div class="avatar-name">
+        <div class="avatar ">
+            <img src="/web/img/avatar.jpg" />
+        </div>
+        <div class="name">
+            <i>Rafael.ru</i>
+        </div>
+    </div>
+    <div class="contents" id="nav-content">
+        <ul>
+            <li >
+                <a href="/web/">
+                    <i class="iconfont icon-shouye1"></i>
+                    <span>主页</span>
+                </a>
+            </li>
+            <li >
+                <a href="/web/tags">
+                    <i class="iconfont icon-biaoqian1"></i>
+                    <span>标签</span>
+                </a>
+            </li>
+            <li >
+                <a href="/web/archives">
+                    <i class="iconfont icon-guidang2"></i>
+                    <span>存档</span>
+                </a>
+            </li>
+            <li >
+                <a href="/web/about/">
+                    <i class="iconfont icon-guanyu2"></i>
+                    <span>关于</span>
+                </a>
+            </li>
+            
+            <li>
+                <a id="search">
+                    <i class="iconfont icon-sousuo1"></i>
+                    <span>搜索</span>
+                </a>
+            </li>
+            
+        </ul>
+    </div>
+    
+        <div id="toc" class="toc-article">
+    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#null"><span class="toc-text"></span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#null"><span class="toc-text">基于yum方式安装Nginx</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#null"><span class="toc-text">nginx配置文件详解</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#null"><span class="toc-text">nginx服务启动、停止、重启</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#null"><span class="toc-text">自定义错误页和访问设置</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#null"><span class="toc-text">访问权限控制</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#null"><span class="toc-text">nginx设置虚拟主机</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#null"><span class="toc-text">nginx反向代理设置</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#null"><span class="toc-text">nginx适配PC或移动设备</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#null"><span class="toc-text">nginx设置Gzip压缩</span></a></li></ol></li></ol>
+</div>
+    
+</div>
+
+
+<div class="search-field" id="search-field">
+    <div class="search-container">
+        <div class="search-input">
+            <span id="esc-search"> <i class="icon-fanhui iconfont"></i></span>
+            <input id="search-input"/>
+            <span id="begin-search">搜索</span>
+        </div>
+        <div class="search-result-container" id="search-result-container">
+
+        </div>
+    </div>
+</div>
+
+        <div class="index-about-mobile">
+            <i>  </i>
+        </div>
+    </div>
+    
+    <div class="index-middle">
+        <!-- Main Content -->
+        
+
+
+<div class="post-container">
+    <div class="post-title">
+        nginx.md
+    </div>
+
+    <div class="post-meta">
+        <span class="attr">发布于：<span>2019-06-20 02:56:01</span></span>
+        
+        </span>
+        <span class="attr">访问：<span id="busuanzi_value_page_pv"></span>
+</span>
+</span>
+    </div>
+    <div class="post-content ">
+        <h1><span id="nginx"></span></h1><p>Nginx是一款轻量级的HTTP服务器，采用事件驱动的异步非阻塞处理方式框架，这让其具有极好的IO性能，时常用于服务端的反向代理和负载均衡</p>
+<p><strong>Nginx版本</strong></p>
+<ul>
+<li>Mainline version  开发版</li>
+<li>Stable version   稳定版</li>
+<li>legacy version  历史版本</li>
+</ul>
+<h2><span id="基于yum方式安装nginx">基于yum方式安装Nginx</span></h2><p><strong>用yum进行安装必要程序</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">yum -y install gcc gcc-c++ autoconf pcre-devel make automake</span><br><span class="line">yum -y install wget httpd-tools vim</span><br></pre></td></tr></table></figure>
+
+<p><strong>检查yum源是否存在nginx</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum list | grep nginx</span><br></pre></td></tr></table></figure>
+
+<p><strong>去nginx查找最新源</strong></p>
+<p><a href="http://nginx.org/en/download.html" target="_blank" rel="noopener">http://nginx.org/en/download.html</a> 下面找到stable and mainline versions</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">[nginx]</span><br><span class="line">name=nginx repo</span><br><span class="line">baseurl=http://nginx.org/packages/OS/OSRELEASE/$basearch/</span><br><span class="line">gpgcheck=0</span><br><span class="line">enabled=1</span><br></pre></td></tr></table></figure>
+
+<p><strong>编辑源</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vim /etc/yum.repos.d/nginx.repo</span><br></pre></td></tr></table></figure>
+
+<p>根据操作系统及版本号修改源的baseurl</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">baseurl=http://nginx.org/packages/centos/7/$basearch/</span><br></pre></td></tr></table></figure>
+
+<p><strong>安装nginx</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum install nginx</span><br></pre></td></tr></table></figure>
+
+<p><strong>查看nginx安装目录</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rpm -ql nginx</span><br></pre></td></tr></table></figure>
+
+<p><code>rpm</code> 是 linux的rpm包管理工具</p>
+<p><code>-q</code>代表询问模式</p>
+<p><code>-l</code>代表返回列表</p>
+<p><strong>查看nginx配置文件的位置</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nginx -t</span><br></pre></td></tr></table></figure>
+
+<h2><span id="nginx配置文件详解">nginx配置文件详解</span></h2><p><strong>nginx.confg配置</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">user nginx;           # 运行用户，默认是nginx, 可以不进行设置</span><br><span class="line">worker_processes  1;  # nginx进程数 一般设置为和CPU核数一样</span><br><span class="line">error_log /var/log/nginx/error.log warn; # 错误日志存放目录</span><br><span class="line">pid    /var/run/nginx.pid;               # 进程pid存放目录</span><br><span class="line">events &#123;</span><br><span class="line">    worker_connections 1024;            # 后台进程的最大并发数</span><br><span class="line">&#125;</span><br><span class="line">http &#123;</span><br><span class="line">    include /etc/nginx/mime.types;        # 文件扩展名与类型映射表</span><br><span class="line">    default_type application/octet-stream;    # 默认文件类型</span><br><span class="line">    log_format main &apos;xxxx&apos;                    # 设置日志模式</span><br><span class="line">    access_log /var/log/nginx/access.log main # nginx访问日志存放位置</span><br><span class="line">    sendfile    on;       # 开启高效传输模式</span><br><span class="line">    # tcp_nopush    on;   # 减少网络报文的数量</span><br><span class="line">    keepalive_timeout 65; # 保持连接的时间，也叫超时时间</span><br><span class="line">    # gzip     on;        # 开启gzip 压缩</span><br><span class="line">    include /etc/nginx/conf.d/*.conf;   # 包含的子配置项位置和文件</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>default.conf</strong></p>
+<figure class="highlight plain"><figcaption><span>5</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">server &#123;</span><br><span class="line">    listen     80;             #配置监听端口</span><br><span class="line">    server_name  localhost;    # 配置域名</span><br><span class="line">    location / &#123;</span><br><span class="line">        root /usr/share/nginx/html;      # 服务器默认启动目录</span><br><span class="line">        index index.html index.htm;      # 默认访问文件</span><br><span class="line">    &#125;</span><br><span class="line">    # error_page 404  /404.html;       # 配置404页面</span><br><span class="line">    error_page 500 502 503 504 /5x.html;  # 错误状态码的显示页面，配置后需要重启</span><br><span class="line">    location /50x.html &#123;</span><br><span class="line">        root /usr/share/nginx/html;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2><span id="nginx服务启动-停止-重启">nginx服务启动、停止、重启</span></h2><p><strong>启动nginx服务</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">nginx     # 直接启动</span><br><span class="line">systemctl start nginx.service  # 使用systemctl命令启动</span><br></pre></td></tr></table></figure>
+
+<p><strong>查询服务的运行状况</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ps aux | grep nginx</span><br></pre></td></tr></table></figure>
+
+<p><strong>停止nginx服务</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">nginx -s stop   # 立即停止服务，无论进程是否在工作，直接停止</span><br><span class="line">nginx -s quit   # 从容停止服务，在进程完成当前工作后在停止</span><br><span class="line">killall nginx   # 杀死进程</span><br><span class="line">systemctl stop nginx.service  # 使用systemctl停止</span><br></pre></td></tr></table></figure>
+
+<p><strong>重启nginx服务</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">systemctl restart nginx.service</span><br></pre></td></tr></table></figure>
+
+<p><strong>重新载入配置文件</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nginx -s reload # 在修改nginx配置文件后，需要重新载入</span><br></pre></td></tr></table></figure>
+
+<p><strong>查看端口号</strong></p>
+<p>在默认情况下，nginx启动后会监听80端口，从而提供http访问，如果80端口被占用，可以使用<code>netstat -tlnp</code>命令查看端口号的占用情况</p>
+<h2><span id="自定义错误页和访问设置">自定义错误页和访问设置</span></h2><p><strong>多错误指向同一个页面</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">error_page 500 502 503 504 /50x.html;    # 将这四个错误代码的时候都跳转到根目录下50x.html</span><br></pre></td></tr></table></figure>
+
+<p>error_page指令用于自定义错误页面</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">error_page 404 /404_error.html;     # 单独为错误指定处理方式</span><br><span class="line">error_page 404 http://www.ssmy.cn;  # 为错误指定外部地址</span><br></pre></td></tr></table></figure>
+
+<h2><span id="访问权限控制">访问权限控制</span></h2><p>有时候我们的服务器只允许特定主机访问，比如内部OA系统或应用的管理后台系统或某些应用接口，这时需要控制一些IP访问，可以直接在location里进行配置</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">location / &#123;                   # / 表示所有请求都走里面的规则</span><br><span class="line">    deny 123.123.123.123;        # 禁止指定IP访问</span><br><span class="line">    allow 345.345.345.345/500;   # 允许指定的IP段访问 345.345.345.345-345.345.345.500</span><br><span class="line">    allow all;                   # 允许所有ip访问</span><br><span class="line">    deny  all;                   # 禁止所有ip访问</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>在同一个块作用域中，先定义的权限指令会覆盖后面的权限指令，后面的权限指令无效</p>
+<p><strong>复杂权限控制匹配</strong></p>
+<p><code>=</code>表示精确匹配</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">location =/img &#123;  # /img 目录允许所有用户访问</span><br><span class="line">    allow all;      </span><br><span class="line">&#125;</span><br><span class="line">location =/admin &#123; # /admin 目录进制所有用户访问</span><br><span class="line">    deny all;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>使用正则表达式设置访问权限</strong></p>
+<p><code>~\</code>表示使用正则表达式</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">location ~\.php$ &#123; # 以.php结尾的页面都进制访问</span><br><span class="line">    deny all;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2><span id="nginx设置虚拟主机">nginx设置虚拟主机</span></h2><p>虚拟主机是指在一台物理主机服务器上划分出多个磁盘空间，每个磁盘空间都是一个虚拟主机，每台虚拟主机都可以对外提供Web服务，并且互不干扰。在外界看来，虚拟主机就是一台独立的服务器主机，这意味着用户能够利用虚拟主机把多个不同域名的网站部署在同一台服务器上</p>
+<p>配置虚拟主机可以基于端口号、IP和域名来设置</p>
+<p>可以在<code>nginx.conf</code>或<code>default.conf</code>中配置，也可以在子文件里新建<code>.conf</code>文件进行配置</p>
+<ul>
+<li>基于端口配置</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">server &#123;</span><br><span class="line">    listen 8001;               # 监听8001端口</span><br><span class="line">    server_name localhost;     # server name</span><br><span class="line">    root /home/html;           # 文件存放目录</span><br><span class="line">    index index.html;          # 首页文件</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>基于IP/域名配置</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">server &#123;</span><br><span class="line">    listen 80;                       # 监听80端口</span><br><span class="line">    server_name 123.123.123.123或域名;     # server name</span><br><span class="line">    root /home/html;                 # 文件存放目录</span><br><span class="line">    index index.html;                # 首页文件</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2><span id="nginx反向代理设置">nginx反向代理设置</span></h2><p><strong>正向代理</strong></p>
+<p>正向代理代理的是客户端。正向代理是客户端想访问目标服务器，但没有权限，代理服务器有访问服务器的权限，同时客户端有访问代理的权限，这时可以通过客户端访问代理服务器，代理服务器访问真实服务器，把内容返回回来</p>
+<p><strong>反向代理</strong></p>
+<p>反向代理代理的是服务器。反向代理是客户端想访问服务器，发送的内容会被发送到代理服务器，代理服务器把请求发送到自己设置好的内部服务器。</p>
+<p><strong>反向代理的用途和好处</strong></p>
+<ul>
+<li><p>安全性</p>
+<p>正向代理的客户端能够在隐藏自身信息的同时访问任意网站，这给网络安全代理了极大的威胁。因此必须把服务器保护起来，使用反向代理客户端，用户只能通过外网来访问代理服务器，并且用户并不知道自己访问的真实服务器是哪一台，可以很好的提供安全保护</p>
+</li>
+<li><p>功能性</p>
+<p>反向代理的主要用途是为多个服务器提供负载均衡，缓存等功能。负载均衡是一个网站的内容被部署在若干服务器上，可以把这些机器看成一个集群，nginx可以将接收到的客户端请求均匀地分配到这个集群中所有的服务器上，从而实现服务器压力的平均分配</p>
+</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">server &#123;</span><br><span class="line">    listen 80;</span><br><span class="line">    server_name 请求域名;</span><br><span class="line">    location / &#123;</span><br><span class="line">        proxy_pass 被代理的域名或端口;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>其它反向代理命令</strong></p>
+<ul>
+<li><code>proxy_set_header</code> 将客户端请求发送给后端服务器之前，更改来自客户端的请求头信息</li>
+<li><code>proxy_connect_timeout</code> 配置nginx与后端代理服务器尝试建立连接的超时时间</li>
+<li><code>proxy_read_timeout</code> 配置nginx向后端服务器组发出read请求后，等待相应的超时时间</li>
+<li><code>proxy_send_timeout</code> 配置nginx向后端服务器组发出write请求后，等待响应的超时时间</li>
+<li><code>proxy_redirect</code> 用于修改后端服务器返回的响应头中的Location和Refresh</li>
+</ul>
+<h2><span id="nginx适配pc或移动设备">nginx适配PC或移动设备</span></h2><p>Nginx通过内置变量<code>$http_user_agent</code>可以获取到请求客户端的userAgent, 可以判断用户目前处于移动端还是PC端，从而展示不同的页面给用户</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">server &#123;</span><br><span class="line">    listen 80;</span><br><span class="line">    server_name nginx2.jspang.com;</span><br><span class="line">    location / &#123;</span><br><span class="line">        root /usr/share/nginx/pc; # 默认访问pc端页面</span><br><span class="line">        if ($http_user_agent ~* &apos;(Android|webOS|iPhone|iPod|BlackBerry)&apos;) &#123;</span><br><span class="line">            root /usr/share/nginx/mobile; # 访问移动端页面</span><br><span class="line">        &#125;</span><br><span class="line">        index index.html;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2><span id="nginx设置gzip压缩">nginx设置Gzip压缩</span></h2><p>Gzip是网页的一种网页压缩技术，经过gzip压缩后，页面大小可以变为原来的30%甚至更小。更小的网页会让用户浏览的体验更好，速度更快。gzip网页压缩的实现需要浏览器和服务器的支持。</p>
+<p>当浏览器支持Gzip压缩时，会在请求消息中包含<code>Accept-Encoding:gzip</code>这样nginx就会向浏览器发送Gzip后的内容,同时在相应信息头中加入<code>Content-Encoding: gzip</code>,声明这是gizp后的内容，告知浏览器要先解压后才能解析输出</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">http &#123;</span><br><span class="line">    gzip on;</span><br><span class="line">    gzip_types text/plain application/javascript text/css;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>Gzip配置项</strong></p>
+<ul>
+<li><code>gzip</code> 用于开启或关闭gzip模块</li>
+<li><code>gzip_buffers</code> 设置系统获取几个单位的缓存用于存储gzip的压缩结果数据流</li>
+<li><code>gzip_comp_level</code> Gzip压缩比，压缩级别是1-9，1的压缩级别最低，9的压缩级别最高。压缩级别越高压缩率越大，压缩时间越长</li>
+<li><code>gzip_disable</code> 可以通过该指令对一些特定的user-agent不使用压缩功能</li>
+<li><code>gzip_min_length</code> 设置允许压缩的页面最小字节数，页面字节数从响应的消息头content-length中获取</li>
+<li><code>gzip_http_version</code> 识别http协议版本，其值可以是1.0或1.1</li>
+<li><code>gzip_proxied</code> 用于设置启用或禁用从代理服务器上收到相应内容gzip压缩</li>
+<li><code>gzip_vary</code>用于在响应消息头中添加Vary: Accept-Encoding, 使代理服务器根据请求头中的Accept-Encoding识别是否启用gzip压缩</li>
+</ul>
+
+        
+            <div class="donate-container">
+    <div class="donate-button">
+        <button id="donate-button">赞赏</button>
+    </div>
+    <div class="donate-img-container hide" id="donate-img-container">
+        <img id="donate-img" src="" data-src="/web/img/donate.jpg">
+        <p> 感谢鼓励 </p>
+    </div>
+</div>
+        
+        <br />
+        <div id="comment-container">
+        </div>
+        <div id="disqus_thread"></div>
+
+        <div id="lv-container">
+        </div>
+
+    </div>
+</div>
+
+    </div>
+</div>
+
+
+<footer class="footer">
+    <ul class="list-inline text-center">
+        
+        
+
+        
+
+        
+
+        
+
+        
+
+    </ul>
+    
+    <p>
+        <span>/</span>
+        
+        <span><a href="http://www.ssmy.cn">ssmy.cn</a></span>
+        <span>/</span>
+        
+    </p>
+    
+    <p>
+        <span id="busuanzi_container_site_pv">
+            <span id="busuanzi_value_site_pv"></span>PV
+        </span>
+        <span id="busuanzi_container_site_uv">
+            <span id="busuanzi_value_site_uv"></span>UV
+        </span>
+        Created By <a href="https://hexo.io/">Hexo</a>  Theme <a href="https://github.com/aircloud/hexo-theme-aircloud">AirCloud</a></p>
+</footer>
+
+
+
+
+</body>
+
+<script>
+    // We expose some of the variables needed by the front end
+    window.hexo_search_path = "search.json"
+    window.hexo_root = "/web/"
+    window.isPost = true
+</script>
+<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+<script src="/web/js/index.js"></script>
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+    <script>
+        /**
+         *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+         *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables
+        */
+        if( '' || '')
+        var disqus_config = function () {
+            this.page.url = '';  // Replace PAGE_URL with your page's canonical URL variable
+            this.page.identifier = ''; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+        };
+
+        (function() { // DON'T EDIT BELOW THIS LINE
+            var d = document, s = d.createElement('script');
+            s.src = 'https://airclouds-blog.disqus.com/embed.js';
+            s.setAttribute('data-timestamp', +new Date());
+            (d.head || d.body).appendChild(s);
+        })();
+    </script>
+
+
+
+</html>
